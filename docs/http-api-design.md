@@ -50,6 +50,15 @@ required, so `build/generate-rtk.js` (`markOptionalRequestBodies`) rewrites the 
 `*ApiArg` member to `body?:` for each such operation and fails the build if it cannot find it.
 `tests/generate-rtk.test.js` type-checks a body-less call against the rewritten type.
 
+### Repeated view and design list filters
+
+Cloud `getViews` and `getPatterns` send one `visibility` query key for each value,
+as in `?visibility=public&visibility=private`. Cloud `getPatterns` uses the same
+encoding for `populate`, with one field name per key. Both parameters are optional
+string arrays declared with `style: form` and `explode: true`. The generated RTK
+client uses this encoding for the two list operations. Pass `visibility: ["public"]`
+when filtering by a single visibility level.
+
 ## HTTP response codes
 
 | Code | Meaning | When to use |

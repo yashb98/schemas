@@ -415,10 +415,14 @@ paths:
             type: boolean
         - name: visibility
           in: query
-          description: Filter by visibility level (public, private).
+          description: Filter by visibility level (public, private). Repeat the parameter to match multiple levels.
           required: false
+          style: form
+          explode: true
           schema:
-            type: string
+            type: array
+            items:
+              type: string
         - $ref: "#/components/parameters/orgIdQuery"
         - $ref: "#/components/parameters/userIdQuery"
       responses:
